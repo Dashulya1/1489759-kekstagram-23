@@ -43,8 +43,8 @@ const MESSAGETEXT = [
 
 const idNum = [200];
 
-for (int = 0, int < idNum.length, int++) {
-  firstNum = 1;
+for (let int = 0; int < idNum.length; int++) {
+  let firstNum = 1;
   idNum[int] = firstNum;
   firstNum += 1;
 }
