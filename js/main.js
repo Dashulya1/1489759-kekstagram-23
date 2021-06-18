@@ -41,22 +41,47 @@ const MESSAGETEXT = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const idNum = [200];
-
-for (let int = 0; int < idNum.length; int++) {
-  let firstNum = 1;
-  idNum[int] = firstNum;
-  firstNum += 1;
+//Массив из 25 чисел
+const idNum = new Array(25).fill(null);
+for (let int = 0; int < idNum.length - 1; int++) {
+  idNum.push(int);
 }
 
-const image = [
-  'avatar-1.svg',
-  'avatar-2.svg',
-  'avatar-3.svg',
-  'avatar-4.svg',
-  'avatar-5.svg',
-  'avatar-6.svg',
-];
+//https://bost.ocks.org/mike/shuffle/
+function shuffle (shuffledArray) {
+  const numbers = shuffledArray.length - 1;
+  let current;
+  let remain;
+
+  //Пока остаются неперемешанные элементы массива
+  while (numbers) {
+    //Взять из оставшихся элемент массива
+    remain = Math.floor(Math.random() * shuffledArray--);
+    //Взять текущий элемент
+    current = shuffledArray[numbers];
+    //Поменять их местами
+    shuffledArray[numbers] = shuffledArray[remain];
+    shuffledArray[remain] = current;
+  }
+  return shuffledArray;
+}
+
+//заносим массив в переменную
+const idShuffled = shuffle(idNum);
+const idMassive = [];
+
+const idReady = (array) => {
+  for (let int = 0; int < 24; int++) {
+    //получаем рандомное число из массива 1-25
+    const randomIndex = randomInteger(1, array.length - 1);
+    //записываем значение из перемешанного массива в переменную
+    idMassive[int] = idShuffled[randomIndex];
+    //удаляем использованное значение
+    array.splice(randomIndex, 1);
+    //сохраняем новый массив
+    return array;
+  }
+};
 
 const description = [
   'Выходные Кекса',
@@ -68,8 +93,8 @@ const description = [
 
 const commentDesc = function() {
   return {
-    id: idNum[randomInteger(0, 134)],
-    avatar: `img/avatar-${image[randomInteger(0, 5)]}.svg`,
+    id: idReady(idNum),
+    avatar: `img/avatar-${randomInteger(0, 5)}.svg`,
     message: MESSAGETEXT[randomInteger(0, MESSAGETEXT.length - 1)],
     name: NAMES[randomInteger(0, NAMES.length - 1)],
   };
@@ -82,9 +107,9 @@ comments.forEach (commentDesc());
 const createPhotoDescription = function() {
   return {
     id: idNum[randomInteger(0, 5)],
-    url: `photos/${idNum[randomInteger(0, 24)]}.jpg`,
+    url: `photos/${idReady(idNum)}.jpg`,
     description: description[randomInteger(0, description.length - 1)],
-    likes: idNum[randomInteger(0, 199)],
+    likes: idNum[randomInteger(15, 200)],
     comments: comments[randomInteger(0, MESSAGETEXT.length - 1)],
   };
 };
