@@ -1,25 +1,8 @@
-//Функция, возвращающая случайное целое число из переданного диапазона включительно.
-//решение https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random#%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5_%D1%81%D0%BB%D1%83%D1%87%D0%B0%D0%B9%D0%BD%D0%BE%D0%B3%D0%BE_%D1%86%D0%B5%D0%BB%D0%BE%D0%B3%D0%BE_%D1%87%D0%B8%D1%81%D0%BB%D0%B0_%D0%B2_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D0%BE%D0%BC_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B2%D0%B0%D0%BB%D0%B5_%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE
-const randomInteger = function (minNum, maxNum) {
-  if (minNum >= 0 && maxNum > minNum) {
-    minNum = Math.ceil(minNum);
-    maxNum = Math.floor(maxNum);
-    return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
-  }
-  return false;
-};
+import {randomInteger, checkLenght} from './utils.js';
+import {idReady} from './idReady.js';
+import {idNum} from './idNum.js';
 
-//функция для проверки длины введенного комментария
-const checkLenght = (comment, maxNum) => {
-  if (comment.length <= maxNum) {
-    return true;
-  }
-  return false;
-};
-
-randomInteger();
 checkLenght();
-
 const NAMES = [
   'Саша',
   'Виолетта',
@@ -40,48 +23,6 @@ const MESSAGETEXT = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-
-//Массив из 25 чисел
-const idNum = new Array(25).fill(null);
-for (let int = 0; int < idNum.length - 1; int++) {
-  idNum.push(int);
-}
-
-//https://bost.ocks.org/mike/shuffle/
-function shuffle (shuffledArray) {
-  const numbers = shuffledArray.length - 1;
-  let current;
-  let remain;
-
-  //Пока остаются неперемешанные элементы массива
-  while (numbers) {
-    //Взять из оставшихся элемент массива
-    remain = Math.floor(Math.random() * shuffledArray--);
-    //Взять текущий элемент
-    current = shuffledArray[numbers];
-    //Поменять их местами
-    shuffledArray[numbers] = shuffledArray[remain];
-    shuffledArray[remain] = current;
-  }
-  return shuffledArray;
-}
-
-//заносим массив в переменную
-const idShuffled = shuffle(idNum);
-const idMassive = [];
-
-const idReady = (array) => {
-  for (let int = 0; int < 24; int++) {
-    //получаем рандомное число из массива 1-25
-    const randomIndex = randomInteger(1, array.length - 1);
-    //записываем значение из перемешанного массива в переменную
-    idMassive[int] = idShuffled[randomIndex];
-    //удаляем использованное значение
-    array.splice(randomIndex, 1);
-    //сохраняем новый массив
-    return array;
-  }
-};
 
 const description = [
   'Выходные Кекса',
