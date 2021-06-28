@@ -56,7 +56,6 @@ const createPhotoDescription = function() {
   };
 };
 
-const photoDescription = [];
+const createMiniature = () => new Array(5).fill(null).map(() => createPhotoDescription());
 
-photoDescription;
-createPhotoDescription();
+export {createMiniature};
