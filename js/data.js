@@ -38,7 +38,7 @@ const commentDesc = function() {
     id: idReady(idNum),
     avatar: `img/avatar-${randomInteger(0, 5)}.svg`,
     message: MESSAGETEXT[randomInteger(0, MESSAGETEXT.length - 1)],
-    name: NAMES[randomInteger(0, NAMES.length - 1)],
+    nameUser: NAMES[randomInteger(0, NAMES.length - 1)],
   };
 };
 
@@ -59,3 +59,4 @@ const createPhotoDescription = function() {
 const createMiniature = () => new Array(5).fill(null).map(() => createPhotoDescription());
 
 export {createMiniature};
+export {comments};
