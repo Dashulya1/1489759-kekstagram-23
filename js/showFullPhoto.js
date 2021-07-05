@@ -1,5 +1,5 @@
 //отрисовка полноразмерного изображения
-import {comments, createMiniature} from './data';
+import {createMiniature} from './data';
 //переменная для блока, куда нужно загружать полноразмерное фото
 const elementPicture = document.querySelector('.big-picture');
 const counterComments = document.querySelector('.social__comment-count');
@@ -22,21 +22,8 @@ elementPicture.addEventListener ('click', () => {
   photoAddress.setAttribute('src', createMiniature.url);
   //Количество лайков likes подставьте как текстовое содержание элемента .likes-count
   countLikes.textContent = createMiniature.likes.length;
-  //Количество комментариев comments подставьте как текстовое содержание элемента.comments-count
+  //Количество комментариев comments подставьте как текстовое содержание элемента .comments-count
   countComments.textContent = createMiniature.commentsAmount.length;
-});
-
-//список комментариев в блок .social__comments
-const usersComments = document.querySelector('social__comments');
-
-//беру атрибуты аватарки и комментарий из экспортированного массива и заменяю данные в существующих блоках
-comments.forEach(({avatar, nameUser, text}) => {
-  const commentsText = usersComments.querySelector('.social__text');
-  const imgAvatar = usersComments.querySelector('social__picture');
-
-  imgAvatar.setAttribute('src', avatar);
-  imgAvatar.setAttribute('alt', nameUser);
-  commentsText.textContent = text;
 });
 
 //Описание фотографии description вставляю строкой в блок .social__caption
