@@ -6,7 +6,7 @@ const randomInteger = function (minNum, maxNum) {
     maxNum = Math.floor(maxNum);
     return Math.floor(Math.random() * (maxNum - minNum)) + minNum;
   }
-  return false;
+  return 0;
 };
 
 //функция для проверки длины введенного комментария
@@ -17,8 +17,27 @@ const checkLenght = (comment, maxNum) => {
   return false;
 };
 
+//https://bost.ocks.org/mike/shuffle/
+function shuffle (shuffledArray) {
+  const numbers = shuffledArray.length - 1;
+  let current;
+  let remain;
+
+  //Пока остаются неперемешанные элементы массива
+  while (numbers) {
+    //Взять из оставшихся элемент массива
+    remain = Math.floor(Math.random() * shuffledArray--);
+    //Взять текущий элемент
+    current = shuffledArray[numbers];
+    //Поменять их местами
+    shuffledArray[numbers] = shuffledArray[remain];
+    shuffledArray[remain] = current;
+  }
+  return shuffledArray;
+}
+
 export {
   randomInteger,
-  checkLenght
+  checkLenght,
+  shuffle
 };
-
