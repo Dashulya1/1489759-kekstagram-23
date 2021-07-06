@@ -4,4 +4,4 @@ import { drawFullPhoto } from '/js/fullPhoto.js';
 
 const photos = fetchPhotos();
 drawMiniatures(photos);
-drawFullPhoto(photos[2]);
+drawFullPhoto(photos[3]);
