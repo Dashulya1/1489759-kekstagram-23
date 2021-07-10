@@ -42,7 +42,7 @@ const commentValidation = function (evt) {
   const MAX_LENGHT = 140;
 
   if (commentLenght < MIN_LENGHT) {
-    evt.target.setCustomValidity(`Ещё ${MIN_LENGTH - commentLength} символов`);
+    // evt.target.setCustomValidity(`Ещё ${MIN_LENGTH - commentLength} символов`);
   } else if (commentLenght > MAX_LENGHT) {
     evt.target.setCustomValidity(`Превышение на ${MAX_LENGHT - commentLenght} символов`);
   } else {
