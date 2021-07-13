@@ -13,6 +13,9 @@ const ESCKEY = 27;
 function openEditor () {
   formWindow.classList.remove('hidden');
   document.body.classList.add('modal-open');
+
+  uploadPhoto.addEventListener('click', closeEditor);
+  document.addEventListener('keydown', pushEscKeydown);
 }
 
 function closeEditor () {
@@ -20,8 +23,8 @@ function closeEditor () {
   formWindow.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
-  uploadPhoto.addEventListener('click', closeEditor);
-  document.addEventListener('keydown', pushEscKeydown);
+  uploadPhoto.removeEventListener('click', closeEditor);
+  document.removeEventListener('keydown', pushEscKeydown);
 }
 
 function pushEscKeydown(evt) {

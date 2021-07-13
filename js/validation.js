@@ -4,7 +4,7 @@ const textOfComment = document.querySelector('.text__description');
 const hashtagValidation = function (evt) {
   const hashtagsArray = hashtagInput.value.split(' ');
 
-  if (hashtagsArray.lenght > 5) {
+  if (hashtagsArray.length > 5) {
     evt.target.setCustomValidity('Можно ввести не более 5 хэштегов');
   }
 
@@ -20,11 +20,11 @@ const hashtagValidation = function (evt) {
     }
   });
 
-  for (let i = 0; i < hashtagsArray.lenght; i++) {
-    let hash = hashtagsArray[i];
-    let switchHash = hashtagsArray[i + 1];
+  for (let i = 0; i < hashtagsArray.length; i++) {
+    let hash = hashtagsArray[i].toLowerCase();
+    let switchHash = hashtagsArray[i + 1].toLowerCase();
 
-    if (!hash.target.toLowerCase() === switchHash.target.toLowerCase()) {
+    if (!hash === switchHash) {
       hash = hashtagsArray[i + 1];
       switchHash = hashtagsArray[i];
     } else {
@@ -37,14 +37,14 @@ hashtagInput.addEventListener ('change', hashtagValidation);
 
 //валидация комментария
 const commentValidation = function (evt) {
-  const commentLenght = textOfComment.value.lenght;
-  const MIN_LENGHT = 2;
-  const MAX_LENGHT = 140;
+  const commentLength = textOfComment.value.length;
+  const MIN_LENGTH = 2;
+  const MAX_LENGTH = 140;
 
-  if (commentLenght < MIN_LENGHT) {
-    // evt.target.setCustomValidity(`Ещё ${MIN_LENGTH - commentLength} символов`);
-  } else if (commentLenght > MAX_LENGHT) {
-    evt.target.setCustomValidity(`Превышение на ${MAX_LENGHT - commentLenght} символов`);
+  if (commentLength < MIN_LENGTH) {
+    evt.target.setCustomValidity(`Ещё ${MIN_LENGTH - commentLength} символов`);
+  } else if (commentLength > MAX_LENGTH) {
+    evt.target.setCustomValidity(`Превышение на ${MAX_LENGTH - commentLength} символов`);
   } else {
     evt.target.setCustomValidity = '';
   }
