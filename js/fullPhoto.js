@@ -101,7 +101,7 @@ function drawFullPhoto(photo) {
 
   showCommentsBlock();
 
-  //По количеству коментариев показывается или скрывается блок загрузки новых комментариев
+  ///По количеству коментариев показывается или скрывается блок загрузки новых комментариев
   if (photo.comments.length <= COMMENTS_STEP) {
     hideCommentsLoader();
   } else {
