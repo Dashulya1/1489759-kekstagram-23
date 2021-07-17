@@ -1,3 +1,4 @@
+export { drawFullPhoto };
 //переменная для блока, куда нужно загружать полноразмерное фото
 const elementPicture = document.querySelector('.big-picture');
 //переменные для добавления данных по изображениям
@@ -10,7 +11,8 @@ const socialCaption = elementPicture.querySelector('.social__caption');
 const socialCommentsCount = elementPicture.querySelector('.social__comment-count');
 const commentsLoader = elementPicture.querySelector('.comments-loader');
 const pictureCancel = document.querySelector('#picture-cancel');
-
+const commentsCount = document.querySelector('.comments-count');
+const COMMENTS_STEP = 5;
 const ESC_KEYCODE = 27;
 
 function openWindow() {
@@ -50,6 +52,7 @@ function drawFullPhoto(photo) {
 
   const fragment = document.createDocumentFragment();
 
+
   photo.comments.forEach((data) => {
     const comment = socialComment.cloneNode(true);
     const avatar = comment.querySelector('.social__picture');
@@ -58,11 +61,50 @@ function drawFullPhoto(photo) {
     avatar.setAttribute('src', data.avatar);
     avatar.setAttribute('alt', data.name);
     text.textContent = data.message;
-
-    fragment.appendChild(comment);
   });
+  // socialComments.appendChild(fragment);
 
-  socialComments.appendChild(fragment);
+  //вставляет сформированные комментарии в блок socialComments, показывает число загруженных комментариев commentsCounter
+  const createComment = (commentsArray) => {
+    let commentsCounter = 0;
+    const commentsBlockElements = commentsArray.map((comment) => fragment.appendChild(comment));
+    socialComments.insertAdjacentHTML('beforeend', commentsBlockElements.join(''));
+    commentsCounter += commentsArray.length;
+    commentsCount.textContent = commentsCounter;
+  };
+
+  //загружает 5 комментариев, если их меньше скрывает кнопку
+  const loadComments = () => {
+    if (fragment.length <= COMMENTS_STEP) {
+      hideCommentsLoader();
+    }
+    createComment.fragment.slice(0, COMMENTS_STEP);
+  };
+
+  //скрывает кнопку загрузки новых комментариев и добавляет обработчик события на кнопку
+  const hideCommentsLoader = () => {
+    commentsLoader.classList.add('hidden');
+    commentsLoader.removeEventListener('click', loadComments);
+  };
+
+  //показывает кнопку загрузки новых комментариев и добавляет обработчик события на кнопку
+  const showCommentsLoader = () => {
+    commentsLoader.classList.remove('hidden');
+    commentsLoader.addEventListener('click', loadComments);
+  };
+
+  //показывает блок с количеством комментариев и отображает не более COMMENTS_STEP комментариев
+  const showCommentsBlock = () => {
+    countComments.classList.remove('hidden');
+    createComment(fragment.slice(0, COMMENTS_STEP));
+  };
+
+  showCommentsBlock();
+
+  //По количеству коментариев показывается или скрывается блок загрузки новых комментариев
+  if (photo.comments.length <= COMMENTS_STEP) {
+    hideCommentsLoader();
+  } else {
+    showCommentsLoader();
+  }
 }
-
-export { drawFullPhoto };
