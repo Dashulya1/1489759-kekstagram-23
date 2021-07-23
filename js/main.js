@@ -3,7 +3,9 @@ import { drawMiniatures } from '/js/miniatures.js';
 import { drawFullPhoto } from '/js/fullPhoto.js';
 import './validation.js';
 import './form.js';
-
+import { scaleChange } from '/js/scale.js';
+import './slider-line.js';
 const photos = fetchPhotos();
 drawMiniatures(photos);
+scaleChange(photos[3]);
 drawFullPhoto(photos[3]);
